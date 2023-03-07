@@ -27,6 +27,9 @@ jobs:
         with:
           node-version: '18'
 
+      - name: 'Install Jest'
+        run: npm install -g jest
+
       - name: 'Test'
         run: npm run test
   build:
