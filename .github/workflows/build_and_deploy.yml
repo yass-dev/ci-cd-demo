@@ -16,8 +16,8 @@ jobs:
       - name: 'Install Angular cli'
         run: npm install -g @angular/cli
 
-      - name: 'Add linter'
-        run: ng add @angular-eslint/schematics@14 --skip-confirmation
+      - name: 'Install NPM packages'
+        run: npm ci
 
       - name: 'Lint'
         run: npm run lint
