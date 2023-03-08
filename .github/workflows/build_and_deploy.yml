@@ -59,6 +59,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    needs: [build]
     name: 🚀Deploy
     steps:
       - uses: actions/checkout@v2
