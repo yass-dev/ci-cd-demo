@@ -61,12 +61,6 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     name: 🚀Deploy
-    strategy:
-      matrix:
-        environment: [ dev, prod ]
-        exclude:
-          - environment: ${{ github.ref == 'refs/heads/main' || 'prod' }}
-    environment: ${{ matrix.environment }}
     steps:
       - uses: actions/checkout@v2
         with:
