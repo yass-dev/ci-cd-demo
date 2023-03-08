@@ -71,30 +71,24 @@ jobs:
         with:
           submodules: true
 
-      - name: test
-        env:
-          ENVIRONMENT: ${{ matrix.environment }}
-        run: |
-          echo env = $ENVIRONMENT
-          if [ env = 'prod' ]
-          then
-            export SECRET_VALUE=${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PURPLE_ISLAND_07B76E503 }}
-          else
-            export SECRET_VALUE=${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_HAPPY_FOREST_03E024503 }}
-          fi
+      - name: Deploy to dev
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PURPLE_ISLAND_07B76E503 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "/"
+          api_location: ""
+          output_location: "dist/demo"
+        if: github.ref != 'refs/heads/main'
 
-      - name: test2
-        env:
-          TEST: ${{secrets.SECRET_VALUE}}
-        run: |
-          echo $TEST | wc
-
-      #      - name: Build And Deploy
-      #        uses: Azure/static-web-apps-deploy@v1
-      #        with:
-      #          azure_static_web_apps_api_token: ${{ env.SECRET_VALUE }}
-      #          repo_token: ${{ secrets.GITHUB_TOKEN }}
-      #          action: "upload"
-      #          app_location: "/"
-      #          api_location: ""
-      #          output_location: "dist/demo"
+      - name: Deploy to prod
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PURPLE_ISLAND_07B76E503 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "/"
+          api_location: ""
+          output_location: "dist/demo"
+        if: github.ref == 'refs/heads/main'
