@@ -69,16 +69,16 @@ jobs:
         run: |
             if [ ${{ github.ref }} = 'refs/heads/main' ]
             then
-              export AZURE_STATIC_WEB_APP_API_TOKEN=${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PURPLE_ISLAND_07B76E503 }}
+              export SECRET_VALUE=${{ secrets.SECRET_VALUE_BRANCH }}
             else
-              export AZURE_STATIC_WEB_APP_API_TOKEN=${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_HAPPY_FOREST_03E024503 }}
+              export SECRET_VALUE=${{ secrets.SECRET_VALUE_BRANCH }}
             fi
             echo "token = $AZURE_STATIC_WEB_APP_API_TOKEN"
 
       - name: Build And Deploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APP_API_TOKEN }}
+          azure_static_web_apps_api_token: ${{ secrets.SECRET_VALUE }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "/"
