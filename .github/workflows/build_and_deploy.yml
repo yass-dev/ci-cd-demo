@@ -2,6 +2,8 @@ name: CI
 on:
   workflow_dispatch: # For GUI manual trigger
   push:
+  pull_request:
+    types: [ opened, reopened ]
 
 jobs:
   lint:
